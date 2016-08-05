@@ -9,6 +9,7 @@ class Dungeon {
         this.info = info
         this.friendStatus = new FriendStatus(game)
         this.battleFriends = []
+        this.paths = []
 
         this.friends = []
         for (let y = 0; y < BOARD_ROWS; ++y) {
@@ -66,25 +67,88 @@ class Dungeon {
 
     advanceRoom() {
         ++this.curRoomIndex
-        let r = this.curRoom().rect
-        for (let i = 0; i < this.enemies.length; ++i)
-            this.enemies[i].show(r, i % 2, i / 2 | 0)
         this.draw(false)
-        for (let s of this.simpleStatuses)
-            s.hide()
-        this.battleFriends.splice(0, this.battleFriends.length)
-        for (let y = r.y; y < r.bottom; ++y) {
-            for (let x = r.x; x < r.right; ++x) {
-                if (this.friends[y][x])
-                    this.battleFriends.push(this.friends[y][x])
+        this.walkToNextRoom().addOnce(function () {
+            for (let s of this.simpleStatuses)
+                s.hide()
+            this.battleFriends.splice(0, this.battleFriends.length)
+            let r = this.curRoom().rect
+            for (let y = r.y; y < r.bottom; ++y) {
+                for (let x = r.x; x < r.right; ++x) {
+                    if (this.friends[y][x])
+                        this.battleFriends.push(this.friends[y][x])
+                }
+            }
+            while (this.battleFriends.length > 4) {
+                let i = this.game.rnd.between(0, this.battleFriends.length - 1)
+                this.battleFriends.splice(i, 1)
+            }
+            for (let i = 0; i < this.battleFriends.length; ++i)
+                this.battleFriends[i].setSimpleStatus(this.simpleStatuses[i])
+        }, this)
+    }
+
+    walkToNextRoom() {
+        let r = this.curRoom().rect
+
+        if (!this.curRoomIndex) {
+            for (let i = 0; i < this.enemies.length; ++i)
+                this.enemies[i].show(r, i % 2, i / 2 | 0)
+            let signal = new Phaser.Signal
+            this.game.time.events.add(0, signal.dispatch, signal)
+            return signal
+        }
+
+        let p = this.paths[this.curRoomIndex - 1]
+        let tweens = []
+        let delays = []
+
+        for (let i = 0; i < this.enemies.length; ++i) {
+            let c = this.enemies[i].cont
+            let x = i % 2
+            let y = i / 2 | 0
+            x = (r.x + r.right) * CELL_SIZE / 2 + (x - 0.5) * 32
+            y = (r.y + r.bottom) * CELL_SIZE / 2 + (y - 0.5) * 32
+            let t = this.game.add.tween(c)
+            let duration = 0
+
+            if (p.y < 0) {
+                if (c.x != p.x) {
+                    duration = Math.abs(c.x - p.x) * 8
+                    t.to({ x : p.x }, duration)
+                }
+                delays.push(duration + (c.y < y ? -c.y : c.y) * 8 - i * 256)
+                t.to({ y }, Math.abs(c.y - y) * 8)
+                if (p.x != x)
+                    t.to({ x }, Math.abs(p.x - x) * 8)
+            } else {
+                if (c.y != p.y) {
+                    duration = Math.abs(c.y - p.y) * 8
+                    t.to({ y : p.y }, duration)
+                }
+                delays.push(duration + (c.x < x ? -c.x : c.x) * 8 - i * 256)
+                t.to({ x }, Math.abs(c.x - x) * 8)
+                if (p.y != y)
+                    t.to({ y }, Math.abs(p.y - y) * 8)
+            }
+            tweens.push(t)
+        }
+
+        let n = tweens.length
+        let signal = new Phaser.Signal
+        function one() {
+            if (!--n) {
+                signal.dispatch()
+                signal.dispose()
             }
         }
-        while (this.battleFriends.length > 4) {
-            let i = this.game.rnd.between(0, this.battleFriends.length - 1)
-            this.battleFriends.splice(i, 1)
+        let mx = Math.max(...delays)
+        for (let i = 0; i < tweens.length; ++i) {
+            tweens[i].onComplete.addOnce(one)
+            tweens[i].delay(mx - delays[i])
+            tweens[i].start()
         }
-        for (let i = 0; i < this.battleFriends.length; ++i)
-            this.battleFriends[i].setSimpleStatus(this.simpleStatuses[i])
+        return signal
     }
 
     tryPopRoom() {
@@ -153,6 +217,7 @@ class Dungeon {
         let all = true
         let rooms = this.rooms
         this.cont.clear()
+        this.paths.splice(0, this.paths.length)
 
         for (let i = 0; i < rooms.length - cand; ++i) {
             this.cont.lineStyle(2, i < this.curRoomIndex ? COLOR_GRAY : COLOR_CYAN)
@@ -211,6 +276,7 @@ class Dungeon {
                 if (!this.intersects(l, r, y, y + 1, cand)) {
                     this.cont.moveTo(l * CELL_SIZE + BOARD_X, (y + 0.5) * CELL_SIZE + BOARD_Y)
                         .lineTo(r * CELL_SIZE + BOARD_X, (y + 0.5) * CELL_SIZE + BOARD_Y)
+                    this.paths.push(new Phaser.Point(-1, (y + 0.5) * CELL_SIZE))
                     return !cand
                 }
             }
@@ -218,6 +284,7 @@ class Dungeon {
                 if (!this.intersects(x, x + 1, t, b, cand)) {
                     this.cont.moveTo((x + 0.5) * CELL_SIZE + BOARD_X, t * CELL_SIZE + BOARD_Y)
                         .lineTo((x + 0.5) * CELL_SIZE + BOARD_X, b * CELL_SIZE + BOARD_Y)
+                    this.paths.push(new Phaser.Point((x + 0.5) * CELL_SIZE, -1))
                     return !cand
                 }
             }
