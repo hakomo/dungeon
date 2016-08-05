@@ -4,6 +4,7 @@ class Friend {
         if (friends[y][x])
             friends[y][x].destroy()
 
+        this.simpleStatus = null
         this.position = new Phaser.Point(x, y)
         this.lv = lv
         this.hp = 1
@@ -21,6 +22,11 @@ class Friend {
         this.cont.position.set(x * CELL_SIZE + 1, y * CELL_SIZE - 2)
 
         friends[y][x] = this
+    }
+
+    setSimpleStatus(status) {
+        this.simpleStatus = status
+        status.show(this)
     }
 
     destroy() {

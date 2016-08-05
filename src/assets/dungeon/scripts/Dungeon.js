@@ -1,12 +1,14 @@
 
 class Dungeon {
     constructor(game, info) {
+        this.game = game
         this.curRoomIndex = -1
         this.rooms = []
         this.enemies = []
         this.cont = game.add.graphics()
         this.info = info
         this.friendStatus = new FriendStatus(game)
+        this.battleFriends = []
 
         this.friends = []
         for (let y = 0; y < BOARD_ROWS; ++y) {
@@ -62,9 +64,25 @@ class Dungeon {
 
     advanceRoom() {
         ++this.curRoomIndex
+        let r = this.curRoom().rect
         for (let i = 0; i < this.enemies.length; ++i)
-            this.enemies[i].show(this.curRoom().rect, i % 2, i / 2 | 0)
+            this.enemies[i].show(r, i % 2, i / 2 | 0)
         this.draw(false)
+        for (let s of this.simpleStatuses)
+            s.hide()
+        this.battleFriends.splice(0, this.battleFriends.length)
+        for (let y = r.y; y < r.bottom; ++y) {
+            for (let x = r.x; x < r.right; ++x) {
+                if (this.friends[y][x])
+                    this.battleFriends.push(this.friends[y][x])
+            }
+        }
+        while (this.battleFriends.length > 4) {
+            let i = this.game.rnd.between(0, this.battleFriends.length - 1)
+            this.battleFriends.splice(i, 1)
+        }
+        for (let i = 0; i < this.battleFriends.length; ++i)
+            this.battleFriends[i].setSimpleStatus(this.simpleStatuses[i])
     }
 
     tryPopRoom() {

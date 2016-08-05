@@ -15,6 +15,9 @@ class FriendSimpleStatus {
 
     show(friend) {
         this.cont.visible = true
+        this.bar.width = Math.ceil(friend.hp * HPBAR_WIDTH)
+        this.char.text = friend.char
+        this.name.text = 'L' + friend.lv
     }
 
     hide() {
