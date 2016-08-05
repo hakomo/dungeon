@@ -72,11 +72,15 @@ class Dungeon {
     }
 
     toggleRoomAggressive(x, y) {
-        for (let i = this.curRoomIndex + 1; i < this.rooms.length; ++i) {
+        for (let i = 0; i < this.rooms.length; ++i) {
             let room = this.rooms[i]
             if (room.rect.contains(x, y)) {
-                room.aggressive = !room.aggressive
-                this.draw(false)
+                if (i > this.curRoomIndex) {
+                    room.aggressive = !room.aggressive
+                    this.draw(false)
+                } else {
+
+                }
                 break
             }
         }
