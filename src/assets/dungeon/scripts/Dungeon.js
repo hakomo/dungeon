@@ -10,6 +10,8 @@ class Dungeon {
         this.friendStatus = new FriendStatus(game)
         this.battleFriends = []
         this.paths = []
+        this.moving = false
+        this.cand = false
 
         this.friends = []
         for (let y = 0; y < BOARD_ROWS; ++y) {
@@ -60,6 +62,8 @@ class Dungeon {
             for (let e of this.enemies)
                 e.walk()
             this.advanceRoom()
+
+            this.game.time.events.loop(5000, this.advanceRoom, this)
         } else {
 
         }
@@ -67,8 +71,10 @@ class Dungeon {
 
     advanceRoom() {
         ++this.curRoomIndex
-        this.draw(false)
+        this.moving = true
         this.walkToNextRoom().addOnce(function () {
+            this.moving = false
+            this.draw(this.cand)
             for (let s of this.simpleStatuses)
                 s.hide()
             this.battleFriends.splice(0, this.battleFriends.length)
@@ -176,6 +182,7 @@ class Dungeon {
     }
 
     pushRoomPreview(rect) {
+        this.cand = true
         this.rooms.push({ rect: new Phaser.Rectangle, aggressive: false })
         this.updateRoomPreview(rect)
     }
@@ -205,10 +212,12 @@ class Dungeon {
         } else {
             this.rooms.pop()
         }
+        this.cand = false
         this.draw(false)
     }
 
     popRoomPreview() {
+        this.cand = false
         this.rooms.pop()
         this.draw(false)
     }
@@ -220,7 +229,7 @@ class Dungeon {
         this.paths.splice(0, this.paths.length)
 
         for (let i = 0; i < rooms.length - cand; ++i) {
-            this.cont.lineStyle(2, i < this.curRoomIndex ? COLOR_GRAY : COLOR_CYAN)
+            this.cont.lineStyle(2, i < this.curRoomIndex - this.moving ? COLOR_GRAY : COLOR_CYAN)
             this.drawRoom(rooms[i].rect)
             if (i < rooms.length - cand - 1)
                 all &= this.drawPath(rooms[i].rect, rooms[i + 1].rect)
