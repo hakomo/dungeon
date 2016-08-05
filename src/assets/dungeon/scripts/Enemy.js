@@ -6,6 +6,7 @@ class Enemy {
         this.cont = game.make.sprite(0, 0, 'swordsman')
         this.cont.visible = false
         this.cont.anchor.set(0.5, 0.5)
+        this.cont.animations.add('walk', [0, 1, 2, 1], 6, true)
         Enemy.container.addChild(this.cont)
     }
 
@@ -22,6 +23,10 @@ class Enemy {
 
     preview(rect, x, y) {
         this.show(rect, x, y, 0.4)
+    }
+
+    walk() {
+        this.cont.animations.play('walk')
     }
 
     destroy() {
