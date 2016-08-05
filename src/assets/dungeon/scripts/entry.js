@@ -72,6 +72,7 @@ const
         Friend.pool = new FriendPool(game.add.graphics(BOARD_X, BOARD_Y))
         dungeon = new Dungeon(game, new DungeonInfo(game, g))
         Enemy.container = game.add.graphics(BOARD_X, BOARD_Y)
+        dungeon.enemyEntryNotice = new EnemyEntryNotice(game)
         cursor = new Cursor(game, dungeon)
 
         for (let y = 0; y < BOARD_ROWS; ++y) {

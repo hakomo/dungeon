@@ -12,6 +12,7 @@ class Dungeon {
         this.paths = []
         this.moving = false
         this.cand = false
+        this.enemyEntryNotice = null
 
         this.friends = []
         for (let y = 0; y < BOARD_ROWS; ++y) {
@@ -62,8 +63,6 @@ class Dungeon {
             for (let e of this.enemies)
                 e.walk()
             this.advanceRoom()
-
-            this.game.time.events.loop(5000, this.advanceRoom, this)
         } else {
 
         }
@@ -98,11 +97,13 @@ class Dungeon {
         let r = this.curRoom().rect
 
         if (!this.curRoomIndex) {
-            for (let i = 0; i < this.enemies.length; ++i)
-                this.enemies[i].show(r, i % 2, i / 2 | 0)
-            let signal = new Phaser.Signal
-            this.game.time.events.add(0, signal.dispatch, signal)
-            return signal
+            for (let i = 0; i < this.enemies.length; ++i) {
+                let t = this.enemies[i].show(r, i % 2, i / 2 | 0)
+                t.delay(i * 100 + 900)
+                t.start()
+            }
+            this.enemyEntryNotice.animate()
+            return this.enemyEntryNotice.tween.onComplete
         }
 
         let p = this.paths[this.curRoomIndex - 1]
