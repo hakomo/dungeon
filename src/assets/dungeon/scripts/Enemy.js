@@ -9,12 +9,17 @@ class Enemy {
         Enemy.container.addChild(this.cont)
     }
 
+    show() {
+        this.cont.visible = true
+        this.cont.alpha = 1
+    }
+
     hide() {
         this.cont.visible = false
     }
 
     preview(rect, x, y) {
-        this.cont.visible = true
+        this.show()
         this.cont.alpha = 0.4
         this.cont.x = (rect.x + rect.right) * CELL_SIZE / 2 + (x - 0.5) * 32
         this.cont.y = (rect.y + rect.bottom) * CELL_SIZE / 2 + (y - 0.5) * 32
