@@ -54,12 +54,17 @@ class Dungeon {
 
     tryOpen() {
         if (this.curRoomIndex < 0 && this.rooms.length) {
-            this.curRoomIndex = 0
-            for (let i = 0; i < this.enemies.length; ++i)
-                this.enemies[i].show(this.curRoom().rect, i % 2, i / 2 | 0)
+            this.advanceRoom()
         } else {
 
         }
+    }
+
+    advanceRoom() {
+        ++this.curRoomIndex
+        for (let i = 0; i < this.enemies.length; ++i)
+            this.enemies[i].show(this.curRoom().rect, i % 2, i / 2 | 0)
+        this.draw(false)
     }
 
     tryPopRoom() {
