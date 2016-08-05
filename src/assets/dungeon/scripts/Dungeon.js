@@ -54,7 +54,7 @@ class Dungeon {
 
     tryOpen() {
         if (this.curRoomIndex < 0 && this.rooms.length) {
-
+            this.curRoomIndex = 0
         } else {
 
         }
