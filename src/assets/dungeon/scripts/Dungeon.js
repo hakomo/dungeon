@@ -55,8 +55,8 @@ class Dungeon {
     tryOpen() {
         if (this.curRoomIndex < 0 && this.rooms.length) {
             this.curRoomIndex = 0
-            for (let e of this.enemies)
-                e.show()
+            for (let i = 0; i < this.enemies.length; ++i)
+                this.enemies[i].show(this.curRoom().rect, i % 2, i / 2 | 0)
         } else {
 
         }
@@ -206,6 +206,10 @@ class Dungeon {
                 return true
         }
         return false
+    }
+
+    curRoom() {
+        return this.rooms[this.curRoomIndex]
     }
 
     roomAt(index) {

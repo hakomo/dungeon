@@ -9,9 +9,11 @@ class Enemy {
         Enemy.container.addChild(this.cont)
     }
 
-    show() {
+    show(rect, x, y, alpha = 1) {
         this.cont.visible = true
-        this.cont.alpha = 1
+        this.cont.alpha = alpha
+        this.cont.x = (rect.x + rect.right) * CELL_SIZE / 2 + (x - 0.5) * 32
+        this.cont.y = (rect.y + rect.bottom) * CELL_SIZE / 2 + (y - 0.5) * 32
     }
 
     hide() {
@@ -19,10 +21,7 @@ class Enemy {
     }
 
     preview(rect, x, y) {
-        this.show()
-        this.cont.alpha = 0.4
-        this.cont.x = (rect.x + rect.right) * CELL_SIZE / 2 + (x - 0.5) * 32
-        this.cont.y = (rect.y + rect.bottom) * CELL_SIZE / 2 + (y - 0.5) * 32
+        this.show(rect, x, y, 0.4)
     }
 
     destroy() {
