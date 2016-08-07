@@ -15,11 +15,6 @@ gulp.task('css', function () {
         .pipe(gulp.dest('build'))
 })
 
-gulp.task('otf', function () {
-    gulp.src('src/*.otf')
-        .pipe(gulp.dest('build'))
-})
-
 gulp.task('image', function () {
     gulp.src('src/**/images/**/*')
         .pipe(gulp.dest('build'))
@@ -38,7 +33,7 @@ gulp.task('js', function () {
         .pipe(gulp.dest('build'))
 })
 
-gulp.task('default', ['html', 'css', 'otf', 'image', 'min.js', 'js'], function () {
+gulp.task('default', ['html', 'css', 'image', 'min.js', 'js'], function () {
     gulp.watch('src/**/*.html', ['html'])
     gulp.watch('src/**/*.css', ['css'])
     gulp.watch('src/**/images/**/*', ['image'])
