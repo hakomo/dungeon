@@ -1,7 +1,7 @@
 
 @font-face {
     font-family: Gennokaku;
-    src: url(https://fonts.gstatic.com/ea/notosansjp/v5/NotoSansJP-Regular.woff2) format('woff2'),
-         url(https://fonts.gstatic.com/ea/notosansjp/v5/NotoSansJP-Regular.woff) format('woff'),
-         local('Noto Sans JP Regular');
+    src: local('Noto Sans JP Regular'),
+         url(https://fonts.gstatic.com/ea/notosansjp/v5/NotoSansJP-Regular.woff2) format('woff2'),
+         url(https://fonts.gstatic.com/ea/notosansjp/v5/NotoSansJP-Regular.woff) format('woff');
 }
