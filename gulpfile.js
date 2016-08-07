@@ -20,6 +20,11 @@ gulp.task('image', function () {
         .pipe(gulp.dest('build'))
 })
 
+gulp.task('font', function () {
+    gulp.src('src/**/fonts/**/*')
+        .pipe(gulp.dest('build'))
+})
+
 gulp.task('min.js', function () {
     gulp.src('src/**/*.min.js')
         .pipe(gulp.dest('build'))
@@ -33,7 +38,7 @@ gulp.task('js', function () {
         .pipe(gulp.dest('build'))
 })
 
-gulp.task('default', ['html', 'css', 'image', 'min.js', 'js'], function () {
+gulp.task('default', ['html', 'css', 'image', 'font', 'min.js', 'js'], function () {
     gulp.watch('src/**/*.html', ['html'])
     gulp.watch('src/**/*.css', ['css'])
     gulp.watch('src/**/images/**/*', ['image'])
