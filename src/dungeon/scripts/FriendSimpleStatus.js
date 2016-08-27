@@ -4,6 +4,13 @@ class FriendSimpleStatus {
         this.cont = game.add.graphics(x, y)
             .lineStyle(1, COLOR_WHITE)
             .drawRect(2, 19, 81, 5)
+        let flush = game.make.graphics()
+            .beginFill(COLOR_WHITE)
+            .drawRect(-4, 0, 94, 28)
+        flush.alpha = 0
+        this.cont.addChild(flush)
+        this.flushTween = game.add.tween(flush).to({ alpha: 0.3 },
+            100, null, false, 0, 0, true)
         this.bar = game.make.graphics(3, 20)
             .beginFill(COLOR_GREEN)
             .drawRect(0, 0, 80, 4)
@@ -22,5 +29,9 @@ class FriendSimpleStatus {
 
     hide() {
         this.cont.visible = false
+    }
+
+    flush() {
+        this.flushTween.start()
     }
 }
