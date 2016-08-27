@@ -18,7 +18,7 @@ class EnemyStatus {
         this.conds = this.cont.addChild(game.make.text(144, 25, '', FONT_GENNOKAKU))
 
         this.overlay = game.add.text(x + 100, y + 41, '撃破', {
-            fill: 'orange',
+            fill: RGBA_ORANGE,
             font: '36px gennokaku',
             stroke: 'black',
             strokeThickness: 4,

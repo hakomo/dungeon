@@ -34,6 +34,8 @@ const
     COLOR_ORANGE    = Phaser.Color.HSLtoRGB(0.1, 0.5, 0.5).color,
     COLOR_WHITE     = Phaser.Color.HSLtoRGB(0.0, 0.0, 0.9).color,
 
+    RGBA_ORANGE     = Phaser.Color.HSLtoRGB(0.1, 1.0, 0.5).rgba,
+
     FONT_GENNOKAKU      = { fill: 'white', font: '18px gennokaku' },
     FONT_VERDANA        = { fill: 'white', font: '16px verdana' },
     FONT_CYAN           = { fill: Phaser.Color.HSLtoRGB(0.6, 0.5, 0.8).rgba, font: '18px gennokaku' },

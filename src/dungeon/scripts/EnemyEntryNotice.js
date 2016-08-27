@@ -8,7 +8,7 @@ class EnemyEntryNotice {
         this.cont.alpha = 0
         this.cont.height = 30
         let t = game.make.text(0, 3, '勇者のパーティーが侵入します', {
-            fill: 'orange',
+            fill: RGBA_ORANGE,
             font: '32px gennokaku',
         })
         t.setShadow(0, 0, 'red', 4)
