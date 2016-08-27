@@ -1,8 +1,7 @@
 
 class Battle {
-    constructor(enemies, friends, friendStatus) {
+    constructor(enemies, friends) {
         this.enemies = enemies
         this.friends = friends
-        this.friendStatus = friendStatus
     }
 }

@@ -1,10 +1,9 @@
 
 class Friend {
-    constructor(x, y, lv, friends, status, char, name, atk, def, mag, mnd, com, rms) {
+    constructor(x, y, lv, friends, char, name, atk, def, mag, mnd, com, rms) {
         if (friends[y][x])
             friends[y][x].destroy()
 
-        this.status = status
         this.simpleStatus = null
         this.position = new Phaser.Point(x, y)
         this.lv = lv
@@ -37,7 +36,7 @@ class Friend {
     damage(damage) {
         this.hp = Math.max(0, this.hp - damage)
         this.simpleStatus.damage(this.hp)
-        this.status.updateHp(this)
+        Friend.status.updateHp(this)
     }
 
     destroy() {
@@ -46,3 +45,4 @@ class Friend {
     }
 }
 Friend.pool = null
+Friend.status = null

@@ -71,6 +71,7 @@ const
 
         Friend.pool = new FriendPool(game.add.graphics(BOARD_X, BOARD_Y))
         dungeon = new Dungeon(game, new DungeonInfo(game, g))
+        Friend.status = dungeon.friendStatus
         Enemy.container = game.add.graphics(BOARD_X, BOARD_Y)
         dungeon.enemyEntryNotice = new EnemyEntryNotice(game)
         cursor = new Cursor(game, dungeon)
@@ -83,7 +84,6 @@ const
                         y,
                         game.rnd.between(1, 99),
                         dungeon.friends,
-                        dungeon.friendStatus,
                         '竜',
                         'ドラゴン',
                         game.rnd.between(0, 5),
