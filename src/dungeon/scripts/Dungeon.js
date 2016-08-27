@@ -31,12 +31,12 @@ class Dungeon {
             }
         }
 
-        this.enemyStatuses = []
-        for (let y = 0; y < 2; ++y) {
+        this.enemyStatuses = Array(4)
+        for (let y = 1; y >= 0; --y) {
             for (let x = 0; x < 2; ++x) {
                 let s = new EnemyStatus(game, x * ENEMY_WIDTH + ENEMY_X,
                     y * ENEMY_HEIGHT + ENEMY_Y)
-                this.enemyStatuses.push(s)
+                this.enemyStatuses[y * 2 + x] = s
             }
         }
     }

@@ -42,6 +42,12 @@ class Enemy {
     damage(damage) {
         this.hp = Math.max(0, this.hp - damage)
         this.status.damage(this.hp / this.maxHp)
+        if (!this.hp) {
+            this.state = ENEMY_DEAD
+            this.cont.angle = -90
+            this.cont.y += 8
+            this.cont.animations.stop('walk')
+        }
     }
 
     destroy() {

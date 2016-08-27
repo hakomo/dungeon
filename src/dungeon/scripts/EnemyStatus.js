@@ -16,11 +16,24 @@ class EnemyStatus {
         this.name = this.cont.addChild(game.make.text(7, 0, '', FONT_CYAN))
         this.lv = this.cont.addChild(game.make.text(7, 28, '', FONT_VERDANA))
         this.conds = this.cont.addChild(game.make.text(144, 25, '', FONT_GENNOKAKU))
+
+        this.overlay = game.add.text(x + 100, y + 41, '撃破', {
+            fill: 'orange',
+            font: '36px gennokaku',
+            stroke: 'black',
+            strokeThickness: 4,
+        })
+        this.overlay.angle = -12
+        this.overlay.anchor.set(0.5, 0.5)
+        this.overlayTween = game.add.tween(this.overlay.scale).from({ x: 1.2, y: 1.2 },
+            100)
+
         this.hide()
     }
 
     show(name, lv) {
         this.cont.visible = true
+        this.cont.alpha = 1
         this.name.text = name
         this.lv.text = 'Lv ' + lv
         this.bar.change(1)
@@ -29,10 +42,16 @@ class EnemyStatus {
 
     hide() {
         this.cont.visible = false
+        this.overlay.visible = false
     }
 
     damage(prop) {
         this.flushTween.start()
         this.bar.animate(prop)
+        if (!prop) {
+            this.cont.alpha = 0.5
+            this.overlay.visible = true
+            this.overlayTween.start()
+        }
     }
 }
