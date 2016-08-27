@@ -4,7 +4,11 @@ class Enemy {
         status.show(name, lv)
         this.game = game
         this.status = status
+
+        this.hp = 200
+        this.maxHp = 200
         this.state = ENEMY_BATTLE
+
         this.cont = game.make.sprite(0, 0, 'swordsman')
         this.cont.visible = false
         this.cont.anchor.set(0.5, 0.5)
@@ -33,6 +37,11 @@ class Enemy {
 
     walk() {
         this.cont.animations.play('walk')
+    }
+
+    damage(damage) {
+        this.hp = Math.max(0, this.hp - damage)
+        this.status.damage(this.hp / this.maxHp)
     }
 
     destroy() {

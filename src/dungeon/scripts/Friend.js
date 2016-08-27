@@ -33,6 +33,11 @@ class Friend {
         this.cont.alpha = alpha
     }
 
+    damage(damage) {
+        this.hp = Math.max(0, this.hp - damage)
+        this.simpleStatus.damage(this.hp)
+    }
+
     destroy() {
         Friend.pool.destroy(this.cont)
         this.friends[this.position.y][this.position.x] = null

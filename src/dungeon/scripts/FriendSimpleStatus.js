@@ -29,7 +29,8 @@ class FriendSimpleStatus {
         this.cont.visible = false
     }
 
-    flush() {
+    damage(prop) {
         this.flushTween.start()
+        this.bar.animate(prop)
     }
 }
