@@ -50,6 +50,9 @@ class Enemy {
         }
     }
 
+    act(enemies, friends) {
+    }
+
     destroy() {
         this.status.hide()
         this.cont.destroy()

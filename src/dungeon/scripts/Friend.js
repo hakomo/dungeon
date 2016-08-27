@@ -41,6 +41,9 @@ class Friend {
             this.destroy()
     }
 
+    act(enemies, friends) {
+    }
+
     destroy() {
         Friend.pool.destroy(this.cont)
         this.friends[this.position.y][this.position.x] = null
