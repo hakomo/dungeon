@@ -49,6 +49,11 @@ class FriendStatus {
         this.rms.text = ['狭いと強い', '', '広いと強い'][friend.rms]
     }
 
+    updateHp(friend) {
+        if (friend === this.friend)
+            this.bar.change(friend.hp)
+    }
+
     hide() {
         this.friend = null
         this.cont.visible = false

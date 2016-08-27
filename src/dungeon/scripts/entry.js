@@ -83,6 +83,7 @@ const
                         y,
                         game.rnd.between(1, 99),
                         dungeon.friends,
+                        dungeon.friendStatus,
                         '竜',
                         'ドラゴン',
                         game.rnd.between(0, 5),
