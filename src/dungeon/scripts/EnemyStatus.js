@@ -10,7 +10,7 @@ class EnemyStatus {
         flush.alpha = 0
         this.cont.addChild(flush)
         this.flushTween = game.add.tween(flush).to({ alpha: 0.2 },
-            100, null, false, 0, 0, true)
+            80, null, false, 0, 0, true)
         this.bar = new Bar(game, 60, 30, HPBAR_WIDTH, 14)
         this.cont.addChild(this.bar.cont)
         this.name = this.cont.addChild(game.make.text(7, 0, '', FONT_CYAN))

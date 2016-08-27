@@ -10,7 +10,7 @@ class FriendSimpleStatus {
         flush.alpha = 0
         this.cont.addChild(flush)
         this.flushTween = game.add.tween(flush).to({ alpha: 0.3 },
-            100, null, false, 0, 0, true)
+            80, null, false, 0, 0, true)
         this.bar = new Bar(game, 3, 20, HPBAR_WIDTH, 4)
         this.cont.addChild(this.bar.cont)
         this.char = this.cont.addChild(game.make.text(0, 0, '', FONT_CYAN))
