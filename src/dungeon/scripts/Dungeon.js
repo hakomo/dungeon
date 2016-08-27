@@ -90,6 +90,13 @@ class Dungeon {
             }
             for (let i = 0; i < this.battleFriends.length; ++i)
                 this.battleFriends[i].setSimpleStatus(this.simpleStatuses[i])
+            for (let y = r.y; y < r.bottom; ++y) {
+                for (let x = r.x; x < r.right; ++x) {
+                    let friend = this.friends[y][x]
+                    if (friend && this.battleFriends.indexOf(friend) < 0)
+                        friend.alpha(0.3)
+                }
+            }
         }, this)
     }
 

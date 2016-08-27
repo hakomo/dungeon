@@ -29,6 +29,10 @@ class Friend {
         status.show(this)
     }
 
+    alpha(alpha) {
+        this.cont.alpha = alpha
+    }
+
     destroy() {
         Friend.pool.destroy(this.cont)
         this.friends[this.position.y][this.position.x] = null
