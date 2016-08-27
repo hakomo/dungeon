@@ -5,32 +5,32 @@ var gulp    = require('gulp'),
     notify  = require('gulp-notify'),
     plumber = require('gulp-plumber')
 
-gulp.task('html', function () {
+gulp.task('html', function() {
     gulp.src('src/**/*.html')
         .pipe(gulp.dest('build'))
 })
 
-gulp.task('css', function () {
+gulp.task('css', function() {
     gulp.src('src/**/*.css')
         .pipe(gulp.dest('build'))
 })
 
-gulp.task('image', function () {
+gulp.task('image', function() {
     gulp.src('src/**/images/**/*')
         .pipe(gulp.dest('build'))
 })
 
-gulp.task('font', function () {
+gulp.task('font', function() {
     gulp.src('src/**/fonts/**/*')
         .pipe(gulp.dest('build'))
 })
 
-gulp.task('min.js', function () {
+gulp.task('min.js', function() {
     gulp.src('src/**/*.min.js')
         .pipe(gulp.dest('build'))
 })
 
-gulp.task('js', function () {
+gulp.task('js', function() {
     gulp.src(['src/**/*.js', '!src/**/*.min.js'])
         .pipe(plumber({
             errorHandler: notify.onError('<%= error.message %>') }))
@@ -38,7 +38,7 @@ gulp.task('js', function () {
         .pipe(gulp.dest('build'))
 })
 
-gulp.task('default', ['html', 'css', 'image', 'font', 'min.js', 'js'], function () {
+gulp.task('default', ['html', 'css', 'image', 'font', 'min.js', 'js'], function() {
     gulp.watch('src/**/*.html', ['html'])
     gulp.watch('src/**/*.css', ['css'])
     gulp.watch('src/**/images/**/*', ['image'])

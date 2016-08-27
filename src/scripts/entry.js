@@ -1,5 +1,5 @@
 ﻿
-(function () {
+(function() {
     var md = new MobileDetect(navigator.userAgent)
     if (md.mobile() || md.versionStr('IE')) {
         document.getElementById('game').innerHTML =
@@ -7,7 +7,7 @@
         return
     }
     var n = 2
-    Entry.one = function () {
+    Entry.one = function() {
         if (!--n) {
             Entry.all()
             var e = document.getElementById('game')

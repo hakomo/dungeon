@@ -42,8 +42,8 @@ const
     FONT_INFO_CYAN      = { fill: Phaser.Color.HSLtoRGB(0.6, 0.5, 0.8).rgba, font: '16px verdana', align: 'center' }
 
 {
-    Entry.all = function () {
-        game.canvas.addEventListener('contextmenu', function (e) {
+    Entry.all = function() {
+        game.canvas.addEventListener('contextmenu', function(e) {
             e.preventDefault()
         })
 

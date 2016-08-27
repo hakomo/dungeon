@@ -71,7 +71,7 @@ class Dungeon {
     advanceRoom() {
         ++this.curRoomIndex
         this.moving = true
-        this.walkToNextRoom().addOnce(function () {
+        this.walkToNextRoom().addOnce(function() {
             this.moving = false
             this.draw(this.cand)
             for (let s of this.simpleStatuses)
