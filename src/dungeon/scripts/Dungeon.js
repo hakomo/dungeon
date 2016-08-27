@@ -13,6 +13,7 @@ class Dungeon {
         this.moving = false
         this.cand = false
         this.enemyEntryNotice = null
+        this.battle = new Battle(this.enemies, this.battleFriends, this.FriendStatus)
 
         this.friends = []
         for (let y = 0; y < BOARD_ROWS; ++y) {
