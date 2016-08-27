@@ -23,11 +23,11 @@ class Dungeon {
             this.friends.push(fs)
         }
 
-        this.simpleStatuses = []
-        for (let y = 0; y < 2; ++y) {
+        this.simpleStatuses = Array(4)
+        for (let y = 1; y >= 0; --y) {
             for (let x = 0; x < 2; ++x) {
                 let s = new FriendSimpleStatus(game, x * 94 + 456, y * 28)
-                this.simpleStatuses.push(s)
+                this.simpleStatuses[y * 2 + x] = s
             }
         }
 

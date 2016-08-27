@@ -37,6 +37,8 @@ class Friend {
         this.hp = Math.max(0, this.hp - damage)
         this.simpleStatus.damage(this.hp)
         Friend.status.updateHp(this)
+        if (!this.hp)
+            this.destroy()
     }
 
     destroy() {
