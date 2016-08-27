@@ -16,10 +16,8 @@ class FriendStatus {
             .drawRect(52, 28, HPBAR_WIDTH + 1, 15)
         this.name = this.cont.addChild(game.make.text(0, 0, '', FONT_CYAN))
         this.lv = this.cont.addChild(game.make.text(0, 27, '', FONT_VERDANA))
-        this.bar = game.make.graphics(53, 29)
-            .beginFill(COLOR_GREEN)
-            .drawRect(0, 0, HPBAR_WIDTH, 14)
-        this.cont.addChild(this.bar)
+        this.bar = new Bar(game, 53, 29, HPBAR_WIDTH, 14)
+        this.cont.addChild(this.bar.cont)
         this.cont.addChild(game.make.text(0, 48, '攻撃', FONT_CYAN))
         this.atk = this.cont.addChild(game.make.text(38, 51, '', FONT_VERDANA))
         this.cont.addChild(game.make.text(0, 72, '魔攻', FONT_CYAN))
@@ -41,6 +39,7 @@ class FriendStatus {
         this.cont.visible = true
         this.name.text = friend.name
         this.lv.text = this.lvs[friend.lv]
+        this.bar.change(friend.hp)
         this.bar.width = Math.ceil(friend.hp * HPBAR_WIDTH)
         this.atk.text = friend.atk ? this.numbers[friend.atk] : ''
         this.mag.text = friend.atk ? '' : this.numbers[friend.mag]

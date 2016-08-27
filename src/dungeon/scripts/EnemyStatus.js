@@ -11,10 +11,8 @@ class EnemyStatus {
         this.cont.addChild(flush)
         this.flushTween = game.add.tween(flush).to({ alpha: 0.2 },
             100, null, false, 0, 0, true)
-        this.bar = game.make.graphics(60, 30)
-            .beginFill(COLOR_GREEN)
-            .drawRect(0, 0, HPBAR_WIDTH, 14)
-        this.cont.addChild(this.bar)
+        this.bar = new Bar(game, 60, 30, HPBAR_WIDTH, 14)
+        this.cont.addChild(this.bar.cont)
         this.name = this.cont.addChild(game.make.text(7, 0, '', FONT_CYAN))
         this.lv = this.cont.addChild(game.make.text(7, 28, '', FONT_VERDANA))
         this.conds = this.cont.addChild(game.make.text(144, 25, '', FONT_GENNOKAKU))
@@ -25,7 +23,7 @@ class EnemyStatus {
         this.cont.visible = true
         this.name.text = name
         this.lv.text = 'Lv ' + lv
-        this.bar.width = HPBAR_WIDTH
+        this.bar.change(1)
         this.conds.text = 'けんこう'
     }
 
