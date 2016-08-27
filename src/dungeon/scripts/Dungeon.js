@@ -105,9 +105,15 @@ class Dungeon {
 
         if (!this.curRoomIndex) {
             for (let i = 0; i < this.enemies.length; ++i) {
-                let t = this.enemies[i].show(r, i % 2, i / 2 | 0)
-                t.delay(i * 100 + 900)
-                t.start()
+                let enemy = this.enemies[i]
+                if (enemy.state === ENEMY_LATE) {
+                    enemy.hide()
+
+                } else {
+                    let t = enemy.show(r, i % 2, i / 2 | 0)
+                    t.delay(i * 100 + 900)
+                    t.start()
+                }
             }
             this.enemyEntryNotice.animate()
             return this.enemyEntryNotice.tween.onComplete
@@ -118,6 +124,8 @@ class Dungeon {
         let delays = []
 
         for (let i = 0; i < this.enemies.length; ++i) {
+            if (this.enemies[i].state !== ENEMY_BATTLE) continue
+
             let c = this.enemies[i].cont
             let x = i % 2
             let y = i / 2 | 0
@@ -151,16 +159,21 @@ class Dungeon {
         let n = tweens.length
         let signal = new Phaser.Signal
         function one() {
-            if (!--n) {
+            if (--n <= 0) {
                 signal.dispatch()
                 signal.dispose()
             }
         }
-        let mx = Math.max(...delays)
-        for (let i = 0; i < tweens.length; ++i) {
-            tweens[i].onComplete.addOnce(one)
-            tweens[i].delay(mx - delays[i])
-            tweens[i].start()
+
+        if (n) {
+            let mx = Math.max(...delays)
+            for (let i = 0; i < tweens.length; ++i) {
+                tweens[i].onComplete.addOnce(one)
+                tweens[i].delay(mx - delays[i])
+                tweens[i].start()
+            }
+
+        } else {
         }
         return signal
     }

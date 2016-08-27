@@ -4,6 +4,7 @@ class Enemy {
         status.show(name, lv)
         this.game = game
         this.status = status
+        this.state = ENEMY_BATTLE
         this.cont = game.make.sprite(0, 0, 'swordsman')
         this.cont.visible = false
         this.cont.anchor.set(0.5, 0.5)
@@ -40,3 +41,7 @@ class Enemy {
     }
 }
 Enemy.container = null
+const
+    ENEMY_BATTLE    = 0,
+    ENEMY_DEAD      = 1,
+    ENEMY_LATE      = 2
