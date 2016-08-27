@@ -1,6 +1,6 @@
 
 class EnemyEntryNotice {
-    constructor(game) {
+    constructor() {
         this.cont = game.add.graphics(320, 241)
             .beginFill(COLOR_BLACK)
             .drawRect(-400, -20, 800, 40)

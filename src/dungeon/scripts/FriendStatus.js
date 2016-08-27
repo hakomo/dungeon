@@ -1,6 +1,6 @@
 
 class FriendStatus {
-    constructor(game) {
+    constructor() {
         this.friend = null
         this.lvs = []
         this.numbers = []
@@ -16,7 +16,7 @@ class FriendStatus {
             .drawRect(52, 28, HPBAR_WIDTH + 1, 15)
         this.name = this.cont.addChild(game.make.text(0, 0, '', FONT_CYAN))
         this.lv = this.cont.addChild(game.make.text(0, 27, '', FONT_VERDANA))
-        this.bar = new Bar(game, 53, 29, HPBAR_WIDTH, 14)
+        this.bar = new Bar(53, 29, HPBAR_WIDTH, 14)
         this.cont.addChild(this.bar.cont)
         this.cont.addChild(game.make.text(0, 48, '攻撃', FONT_CYAN))
         this.atk = this.cont.addChild(game.make.text(38, 51, '', FONT_VERDANA))

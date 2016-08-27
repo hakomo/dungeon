@@ -1,6 +1,6 @@
 
 class EnemyStatus {
-    constructor(game, x, y) {
+    constructor(x, y) {
         this.cont = game.add.graphics(x, y)
             .lineStyle(1, COLOR_WHITE)
             .drawRect(59, 29, HPBAR_WIDTH + 1, 15)
@@ -11,7 +11,7 @@ class EnemyStatus {
         this.cont.addChild(flush)
         this.flushTween = game.add.tween(flush).to({ alpha: 0.2 },
             80, null, false, 0, 0, true)
-        this.bar = new Bar(game, 60, 30, HPBAR_WIDTH, 14)
+        this.bar = new Bar(60, 30, HPBAR_WIDTH, 14)
         this.cont.addChild(this.bar.cont)
         this.name = this.cont.addChild(game.make.text(7, 0, '', FONT_CYAN))
         this.lv = this.cont.addChild(game.make.text(7, 28, '', FONT_VERDANA))

@@ -1,12 +1,11 @@
 
 class Mouse {
-    constructor(game) {
-        this.game = game
+    constructor() {
         this.state = this.prev = MOUSE_NEUTRAL
     }
 
     preUpdate() {
-        let p = this.game.input.activePointer
+        let p = game.input.activePointer
         this.prev = this.state
 
         if (this.state === MOUSE_NEUTRAL) {
@@ -19,7 +18,7 @@ class Mouse {
         } else if (this.state === MOUSE_DOWN_LEFT) {
             let p1 = p.position
             let p2 = p.positionDown
-            if (this.game.math.distanceSq(p1.x, p1.y, p2.x, p2.y) > 4) {
+            if (game.math.distanceSq(p1.x, p1.y, p2.x, p2.y) > 4) {
                 this.state = MOUSE_DRAG_LEFT
             } else if (p.rightButton.isDown) {
                 this.state = MOUSE_CANCEL

@@ -44,6 +44,7 @@ const
     FONT_INFO_PURPLE    = { fill: Phaser.Color.HSLtoRGB(0.9, 1.0, 0.5).rgba, font: '14px verdana' },
     FONT_INFO_CYAN      = { fill: Phaser.Color.HSLtoRGB(0.6, 0.5, 0.8).rgba, font: '16px verdana', align: 'center' }
 
+let game
 {
     Entry.all = function() {
         game.canvas.addEventListener('contextmenu', function(e) {
@@ -73,11 +74,11 @@ const
         game.add.image(460, 66, 'girl')
 
         Friend.pool = new FriendPool(game.add.graphics(BOARD_X, BOARD_Y))
-        dungeon = new Dungeon(game, new DungeonInfo(game, g))
+        dungeon = new Dungeon(new DungeonInfo(g))
         Friend.status = dungeon.friendStatus
         Enemy.container = game.add.graphics(BOARD_X, BOARD_Y)
-        dungeon.enemyEntryNotice = new EnemyEntryNotice(game)
-        cursor = new Cursor(game, dungeon)
+        dungeon.enemyEntryNotice = new EnemyEntryNotice
+        cursor = new Cursor(dungeon)
 
         for (let y = 0; y < BOARD_ROWS; ++y) {
             for (let x = 0; x < BOARD_COLUMNS; ++x) {
@@ -101,7 +102,7 @@ const
         }
 
         for (let s of dungeon.enemyStatuses) {
-            let e = new Enemy(game, '剣士', game.rnd.between(1, 99), s)
+            let e = new Enemy('剣士', game.rnd.between(1, 99), s)
             dungeon.enemies.push(e)
         }
     }
@@ -109,7 +110,7 @@ const
     let mouse
     let cursor
     let dungeon
-    let game = new Phaser.Game(640, 480, Phaser.AUTO, 'game', {
+    game = new Phaser.Game(640, 480, Phaser.AUTO, 'game', {
         preload() {
             game.load
                 .image('girl', 'images/girl.png')

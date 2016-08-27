@@ -1,6 +1,6 @@
 
 class FriendSimpleStatus {
-    constructor(game, x, y) {
+    constructor(x, y) {
         this.cont = game.add.graphics(x, y)
             .lineStyle(1, COLOR_WHITE)
             .drawRect(2, 19, 81, 5)
@@ -11,7 +11,7 @@ class FriendSimpleStatus {
         this.cont.addChild(flush)
         this.flushTween = game.add.tween(flush).to({ alpha: 0.3 },
             80, null, false, 0, 0, true)
-        this.bar = new Bar(game, 3, 20, HPBAR_WIDTH, 4)
+        this.bar = new Bar(3, 20, HPBAR_WIDTH, 4)
         this.cont.addChild(this.bar.cont)
         this.char = this.cont.addChild(game.make.text(0, 0, '', FONT_CYAN))
         this.name = this.cont.addChild(game.make.text(23, 3, '', FONT_VERDANA))

@@ -1,7 +1,6 @@
 
 class Battle {
-    constructor(game, enemies, friends) {
-        this.game = game
+    constructor(enemies, friends) {
         this.enemies = enemies
         this.friends = friends
         this.charas = []
@@ -24,7 +23,7 @@ class Battle {
         this.index = (this.index + 1) % this.charas.length
         if (!this.index) {
             for (let i = 1; i < this.charas.length; ++i) {
-                let j = this.game.rnd.between(0, i)
+                let j = game.rnd.between(0, i)
                 let chara = this.charas[i]
                 this.charas[i] = this.charas[j]
                 this.charas[j] = chara

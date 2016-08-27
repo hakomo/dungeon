@@ -1,6 +1,6 @@
 
 class DungeonInfo {
-    constructor(game, g) {
+    constructor(g) {
         this.powerText = game.add.text(INFO_X1 + 105, INFO_Y1, '', FONT_INFO_WHITE)
         this.powerText.anchor.set(1, 0.7)
         game.add.text(INFO_X1, INFO_Y1, 'dungeon power', FONT_INFO_PURPLE)

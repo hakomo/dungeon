@@ -1,7 +1,6 @@
 
 class Cursor {
-    constructor(game, dungeon) {
-        this.game = game
+    constructor(dungeon) {
         this.dungeon = dungeon
 
         this.downLeftInBoard = false
@@ -17,7 +16,7 @@ class Cursor {
     }
 
     update(mouse) {
-        let { game, dungeon } = this
+        let { dungeon } = this
 
         let p = game.input.activePointer
         let x = p.x - BOARD_X

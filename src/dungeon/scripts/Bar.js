@@ -1,7 +1,6 @@
 
 class Bar {
-    constructor(game, x, y, width, height) {
-        this.game = game
+    constructor(x, y, width, height) {
         this.width = width
         this.cont = game.make.graphics(x, y)
             .beginFill(COLOR_GREEN)
@@ -24,7 +23,7 @@ class Bar {
         }
         let width = Math.ceil(prop * this.width)
         if (width === this.cont.width) return
-        this.tween = this.game.add.tween(this.cont).to({ width },
+        this.tween = game.add.tween(this.cont).to({ width },
             Math.abs(width - this.cont.width) * 20, null, true)
     }
 }

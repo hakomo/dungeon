@@ -1,19 +1,18 @@
 
 class Dungeon {
-    constructor(game, info) {
-        this.game = game
+    constructor(info) {
         this.curRoomIndex = -1
         this.rooms = []
         this.enemies = []
         this.cont = game.add.graphics()
         this.info = info
-        this.friendStatus = new FriendStatus(game)
+        this.friendStatus = new FriendStatus
         this.battleFriends = []
         this.paths = []
         this.moving = false
         this.cand = false
         this.enemyEntryNotice = null
-        this.battle = new Battle(game, this.enemies, this.battleFriends)
+        this.battle = new Battle(this.enemies, this.battleFriends)
 
         this.friends = []
         for (let y = 0; y < BOARD_ROWS; ++y) {
@@ -26,7 +25,7 @@ class Dungeon {
         this.simpleStatuses = Array(4)
         for (let y = 1; y >= 0; --y) {
             for (let x = 0; x < 2; ++x) {
-                let s = new FriendSimpleStatus(game, x * 94 + 456, y * 28)
+                let s = new FriendSimpleStatus(x * 94 + 456, y * 28)
                 this.simpleStatuses[y * 2 + x] = s
             }
         }
@@ -34,7 +33,7 @@ class Dungeon {
         this.enemyStatuses = Array(4)
         for (let y = 1; y >= 0; --y) {
             for (let x = 0; x < 2; ++x) {
-                let s = new EnemyStatus(game, x * ENEMY_WIDTH + ENEMY_X,
+                let s = new EnemyStatus(x * ENEMY_WIDTH + ENEMY_X,
                     y * ENEMY_HEIGHT + ENEMY_Y)
                 this.enemyStatuses[y * 2 + x] = s
             }
@@ -86,7 +85,7 @@ class Dungeon {
                 }
             }
             while (this.battleFriends.length > 4) {
-                let i = this.game.rnd.between(0, this.battleFriends.length - 1)
+                let i = game.rnd.between(0, this.battleFriends.length - 1)
                 this.battleFriends.splice(i, 1)
             }
             for (let i = 0; i < this.battleFriends.length; ++i)
@@ -133,7 +132,7 @@ class Dungeon {
             let y = i / 2 | 0
             x = (r.x + r.right) * CELL_SIZE / 2 + (x - 0.5) * 32
             y = (r.y + r.bottom) * CELL_SIZE / 2 + (y - 0.5) * 32
-            let t = this.game.add.tween(c)
+            let t = game.add.tween(c)
             let duration = 0
 
             if (p.y < 0) {
