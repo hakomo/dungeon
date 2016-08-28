@@ -1,8 +1,9 @@
 
 class Battle {
-    constructor(friends) {
+    constructor(dungeon) {
         this.enemies = []
-        this.friends = friends
+        this.dungeon = dungeon
+        this.friends = dungeon.battleFriends
         this.charas = []
         this.aggressive
         this.index = -1
@@ -25,6 +26,16 @@ class Battle {
     }
 
     advance() {
+        if (!this.enemies.length) {
+            this.timer.stop(false)
+            return
+
+        } else if (!this.friends.length) {
+            this.timer.stop(false)
+            this.dungeon.advanceRoom()
+            return
+        }
+
         this.index = (this.index + 1) % this.charas.length
         if (!this.index) {
             for (let i = 1; i < this.charas.length; ++i) {
