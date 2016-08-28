@@ -25,7 +25,7 @@ class EnemyStatus {
         })
         this.overlay.angle = -12
         this.overlay.anchor.set(0.5, 0.5)
-        this.overlayTween = game.add.tween(this.overlay.scale).from({ x: 1.2, y: 1.2 },
+        this.overlayTween = game.add.tween(this.overlay.scale).to({ x: 1, y: 1 },
             100)
 
         this.hide()
@@ -51,6 +51,8 @@ class EnemyStatus {
         if (!prop) {
             this.cont.alpha = 0.5
             this.overlay.visible = true
+            this.overlay.scale.x = 1.2
+            this.overlay.scale.y = 1.2
             this.overlayTween.start()
         }
     }

@@ -24,7 +24,7 @@ class FriendSimpleStatus {
             strokeThickness: 4,
         })
         this.overlay.anchor.set(0.5, 0.5)
-        this.overlayTween = game.add.tween(this.overlay.scale).from({ x: 1.2, y: 1.2 },
+        this.overlayTween = game.add.tween(this.overlay.scale).to({ x: 1, y: 1 },
             100)
 
         this.hide()
@@ -54,6 +54,8 @@ class FriendSimpleStatus {
             this.overlay.visible = true
             this.overlay.text = '撃破'
             this.overlay.fill = RGBA_ORANGE
+            this.overlay.scale.x = 1.2
+            this.overlay.scale.y = 1.2
             this.overlayTween.start()
         }
     }
@@ -63,6 +65,8 @@ class FriendSimpleStatus {
         this.overlay.visible = true
         this.overlay.text = '退却'
         this.overlay.fill = RGBA_BLUE
+        this.overlay.scale.x = 1.2
+        this.overlay.scale.y = 1.2
         this.overlayTween.start()
     }
 }
