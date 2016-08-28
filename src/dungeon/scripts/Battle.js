@@ -1,7 +1,7 @@
 
 class Battle {
-    constructor(enemies, friends) {
-        this.enemies = enemies
+    constructor(friends) {
+        this.enemies = []
         this.friends = friends
         this.charas = []
         this.index = -1
@@ -9,11 +9,14 @@ class Battle {
         this.timer.loop(1000, this.advance, this)
     }
 
-    start() {
+    start(enemies) {
         this.charas.splice(0, this.charas.length, ...this.friends)
-        for (let enemy of this.enemies) {
-            if (enemy.state === ENEMY_BATTLE)
+        this.enemies.splice(0, this.enemies.length)
+        for (let enemy of enemies) {
+            if (enemy.state === CHARA_BATTLE) {
+                this.enemies.push(enemy)
                 this.charas.push(enemy)
+            }
         }
         this.index = -1
         this.timer.start()
@@ -30,12 +33,16 @@ class Battle {
             }
         }
         this.charas[this.index].act(this.enemies, this.friends)
+        for (let i = this.enemies.length - 1; i >= 0; --i) {
+            if (this.enemies[i].state !== CHARA_BATTLE)
+                this.enemies.splice(i, 1)
+        }
         for (let i = this.friends.length - 1; i >= 0; --i) {
-            if (!this.friends[i].hp)
+            if (this.friends[i].state !== CHARA_BATTLE)
                 this.friends.splice(i, 1)
         }
         for (let i = this.charas.length - 1; i >= 0; --i) {
-            if (!this.charas[i].hp && this.charas[i] instanceof Friend) {
+            if (this.charas[i].state !== CHARA_BATTLE) {
                 this.charas.splice(i, 1)
                 if (i >= this.index)
                     --this.index

@@ -5,6 +5,7 @@ class Friend {
             friends[y][x].destroy()
 
         this.simpleStatus = null
+        this.state = CHARA_BATTLE
         this.position = new Phaser.Point(x, y)
         this.lv = lv
         this.hp = 1
@@ -37,8 +38,10 @@ class Friend {
         this.hp = Math.max(0, this.hp - damage)
         this.simpleStatus.damage(this.hp)
         Friend.status.updateHp(this)
-        if (!this.hp)
+        if (!this.hp) {
+            this.state = CHARA_DEAD
             this.destroy()
+        }
     }
 
     act(enemies, friends) {

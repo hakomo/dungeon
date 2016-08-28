@@ -6,7 +6,7 @@ class Enemy {
 
         this.hp = 200
         this.maxHp = 200
-        this.state = ENEMY_BATTLE
+        this.state = CHARA_BATTLE
 
         this.cont = game.make.sprite(0, 0, 'swordsman')
         this.cont.visible = false
@@ -42,7 +42,7 @@ class Enemy {
         this.hp = Math.max(0, this.hp - damage)
         this.status.damage(this.hp / this.maxHp)
         if (!this.hp) {
-            this.state = ENEMY_DEAD
+            this.state = CHARA_DEAD
             this.cont.angle = -90
             this.cont.y += 8
             this.cont.animations.stop('walk')
@@ -59,6 +59,7 @@ class Enemy {
 }
 Enemy.container = null
 const
-    ENEMY_BATTLE    = 0,
-    ENEMY_DEAD      = 1,
-    ENEMY_LATE      = 2
+    CHARA_BATTLE    = 0,
+    CHARA_DEAD      = 1,
+    CHARA_LATE      = 2,
+    CHARA_ESCAPE    = 3

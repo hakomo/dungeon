@@ -12,7 +12,7 @@ class Dungeon {
         this.moving = false
         this.cand = false
         this.enemyEntryNotice = null
-        this.battle = new Battle(this.enemies, this.battleFriends)
+        this.battle = new Battle(this.battleFriends)
 
         this.friends = []
         for (let y = 0; y < BOARD_ROWS; ++y) {
@@ -88,8 +88,10 @@ class Dungeon {
                 let i = game.rnd.between(0, this.battleFriends.length - 1)
                 this.battleFriends.splice(i, 1)
             }
-            for (let i = 0; i < this.battleFriends.length; ++i)
+            for (let i = 0; i < this.battleFriends.length; ++i) {
+                this.battleFriends[i].state = CHARA_BATTLE
                 this.battleFriends[i].setSimpleStatus(this.simpleStatuses[i])
+            }
             for (let y = r.y; y < r.bottom; ++y) {
                 for (let x = r.x; x < r.right; ++x) {
                     let friend = this.friends[y][x]
@@ -97,7 +99,7 @@ class Dungeon {
                         friend.alpha(0.3)
                 }
             }
-            this.battle.start()
+            this.battle.start(this.enemies)
         }, this)
     }
 
@@ -107,7 +109,7 @@ class Dungeon {
         if (!this.curRoomIndex) {
             for (let i = 0; i < this.enemies.length; ++i) {
                 let enemy = this.enemies[i]
-                if (enemy.state === ENEMY_LATE) {
+                if (enemy.state === CHARA_LATE) {
                     enemy.hide()
 
                 } else {
@@ -125,7 +127,7 @@ class Dungeon {
         let delays = []
 
         for (let i = 0; i < this.enemies.length; ++i) {
-            if (this.enemies[i].state !== ENEMY_BATTLE) continue
+            if (this.enemies[i].state !== CHARA_BATTLE) continue
 
             let c = this.enemies[i].cont
             let x = i % 2
