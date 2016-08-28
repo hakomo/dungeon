@@ -9,6 +9,7 @@ class Friend {
         this.position = new Phaser.Point(x, y)
         this.lv = lv
         this.hp = 1
+        this.startHp
         this.friends = friends
         this.char = char
         this.name = char + ' ' + name
@@ -25,7 +26,9 @@ class Friend {
         friends[y][x] = this
     }
 
-    setSimpleStatus(status) {
+    start(status) {
+        this.state = CHARA_BATTLE
+        this.startHp = this.hp
         this.simpleStatus = status
         status.show(this)
     }
@@ -44,8 +47,14 @@ class Friend {
         }
     }
 
-    act(enemies, friends) {
-        game.rnd.pick(enemies).damage(game.rnd.between(2, 10))
+    act(enemies, friends, aggressive) {
+        if (this.startHp - this.hp < (aggressive ? 0.4 : 0.2)) {
+            game.rnd.pick(enemies).damage(game.rnd.between(2, 10))
+
+        } else {
+            this.state = CHARA_ESCAPE
+            this.simpleStatus.escape()
+        }
     }
 
     destroy() {

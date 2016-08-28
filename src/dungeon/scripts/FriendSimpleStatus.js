@@ -52,4 +52,12 @@ class FriendSimpleStatus {
             this.overlayTween.start()
         }
     }
+
+    escape() {
+        this.cont.alpha = 0.5
+        this.overlay.visible = true
+        this.overlay.text = '退却'
+        this.overlay.fill = RGBA_BLUE
+        this.overlayTween.start()
+    }
 }

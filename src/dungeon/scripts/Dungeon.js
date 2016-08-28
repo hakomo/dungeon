@@ -88,10 +88,8 @@ class Dungeon {
                 let i = game.rnd.between(0, this.battleFriends.length - 1)
                 this.battleFriends.splice(i, 1)
             }
-            for (let i = 0; i < this.battleFriends.length; ++i) {
-                this.battleFriends[i].state = CHARA_BATTLE
-                this.battleFriends[i].setSimpleStatus(this.simpleStatuses[i])
-            }
+            for (let i = 0; i < this.battleFriends.length; ++i)
+                this.battleFriends[i].start(this.simpleStatuses[i])
             for (let y = r.y; y < r.bottom; ++y) {
                 for (let x = r.x; x < r.right; ++x) {
                     let friend = this.friends[y][x]
@@ -99,7 +97,7 @@ class Dungeon {
                         friend.alpha(0.3)
                 }
             }
-            this.battle.start(this.enemies)
+            this.battle.start(this.enemies, this.curRoom().aggressive)
         }, this)
     }
 

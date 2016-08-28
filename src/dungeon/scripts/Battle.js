@@ -4,12 +4,14 @@ class Battle {
         this.enemies = []
         this.friends = friends
         this.charas = []
+        this.aggressive
         this.index = -1
         this.timer = game.time.create()
         this.timer.loop(1000, this.advance, this)
     }
 
-    start(enemies) {
+    start(enemies, aggressive) {
+        this.aggressive = aggressive
         this.charas.splice(0, this.charas.length, ...this.friends)
         this.enemies.splice(0, this.enemies.length)
         for (let enemy of enemies) {
@@ -32,7 +34,7 @@ class Battle {
                 this.charas[j] = chara
             }
         }
-        this.charas[this.index].act(this.enemies, this.friends)
+        this.charas[this.index].act(this.enemies, this.friends, this.aggressive)
         for (let i = this.enemies.length - 1; i >= 0; --i) {
             if (this.enemies[i].state !== CHARA_BATTLE)
                 this.enemies.splice(i, 1)
