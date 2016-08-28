@@ -9,7 +9,7 @@ class EnemyStatus {
             .drawRect(0, 0, ENEMY_WIDTH, ENEMY_HEIGHT)
         flush.alpha = 0
         this.cont.addChild(flush)
-        this.flushTween = game.add.tween(flush).to({ alpha: 0.2 },
+        this.flushTween = game.add.tween(flush).to({ alpha: 0.3 },
             80, null, false, 0, 0, true)
         this.bar = new Bar(60, 30, HPBAR_WIDTH, 14)
         this.cont.addChild(this.bar.cont)

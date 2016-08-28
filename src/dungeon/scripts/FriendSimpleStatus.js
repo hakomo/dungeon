@@ -9,7 +9,7 @@ class FriendSimpleStatus {
             .drawRect(-4, 0, 94, 28)
         flush.alpha = 0
         this.cont.addChild(flush)
-        this.flushTween = game.add.tween(flush).to({ alpha: 0.3 },
+        this.flushTween = game.add.tween(flush).to({ alpha: 0.4 },
             80, null, false, 0, 0, true)
         this.bar = new Bar(3, 20, HPBAR_WIDTH, 4)
         this.cont.addChild(this.bar.cont)
