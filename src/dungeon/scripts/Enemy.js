@@ -50,6 +50,7 @@ class Enemy {
     }
 
     act(enemies, friends) {
+        game.rnd.pick(friends).damage(game.rnd.realInRange(0.01, 0.05))
     }
 
     destroy() {

@@ -45,6 +45,7 @@ class Friend {
     }
 
     act(enemies, friends) {
+        game.rnd.pick(enemies).damage(game.rnd.between(2, 10))
     }
 
     destroy() {
