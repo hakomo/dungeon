@@ -31,7 +31,7 @@ const
     COLOR_CYAN      = Phaser.Color.HSLtoRGB(0.4, 0.5, 0.5).color,
     COLOR_GRAY      = Phaser.Color.HSLtoRGB(0.0, 0.0, 0.5).color,
     COLOR_GREEN     = Phaser.Color.HSLtoRGB(0.3, 0.5, 0.5).color,
-    COLOR_ORANGE    = Phaser.Color.HSLtoRGB(0.1, 0.5, 0.5).color,
+    COLOR_ORANGE    = Phaser.Color.HSLtoRGB(0.1, 1.0, 0.5).color,
     COLOR_WHITE     = Phaser.Color.HSLtoRGB(0.0, 0.0, 0.9).color,
 
     RGBA_ORANGE     = Phaser.Color.HSLtoRGB(0.1, 1.0, 0.5).rgba,

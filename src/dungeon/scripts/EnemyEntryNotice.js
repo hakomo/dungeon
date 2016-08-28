@@ -11,7 +11,6 @@ class EnemyEntryNotice {
             fill: RGBA_ORANGE,
             font: '32px gennokaku',
         })
-        t.setShadow(0, 0, 'red', 4)
         t.anchor.set(0.5, 0.5)
         this.cont.addChild(t)
 
