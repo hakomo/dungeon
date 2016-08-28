@@ -30,7 +30,7 @@ class Friend {
         this.state = CHARA_BATTLE
         this.startHp = this.hp
         this.simpleStatus = status
-        status.show(this)
+        return status.show(this)
     }
 
     alpha(alpha) {

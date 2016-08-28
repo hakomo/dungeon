@@ -25,7 +25,7 @@ class Dungeon {
         this.simpleStatuses = Array(4)
         for (let y = 1; y >= 0; --y) {
             for (let x = 0; x < 2; ++x) {
-                let s = new FriendSimpleStatus(x * 94 + 456, y * 28)
+                let s = new FriendSimpleStatus(x * 94 + 456, y * 28, y * 200 + x * 100)
                 this.simpleStatuses[y * 2 + x] = s
             }
         }
@@ -88,8 +88,6 @@ class Dungeon {
                 let i = game.rnd.between(0, this.battleFriends.length - 1)
                 this.battleFriends.splice(i, 1)
             }
-            for (let i = 0; i < this.battleFriends.length; ++i)
-                this.battleFriends[i].start(this.simpleStatuses[i])
             for (let y = r.y; y < r.bottom; ++y) {
                 for (let x = r.x; x < r.right; ++x) {
                     let friend = this.friends[y][x]
@@ -97,7 +95,12 @@ class Dungeon {
                         friend.alpha(0.3)
                 }
             }
-            this.battle.start(this.enemies, this.curRoom().aggressive)
+            let tween
+            for (let i = 0; i < this.battleFriends.length; ++i)
+                tween = this.battleFriends[i].start(this.simpleStatuses[i])
+            tween.onComplete.addOnce(function() {
+                this.battle.start(this.enemies, this.curRoom().aggressive)
+            }, this)
         }, this)
     }
 

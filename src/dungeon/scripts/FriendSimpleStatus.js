@@ -1,6 +1,6 @@
 
 class FriendSimpleStatus {
-    constructor(x, y) {
+    constructor(x, y, delay) {
         this.cont = game.add.graphics(x, y)
             .lineStyle(1, COLOR_WHITE)
             .drawRect(2, 19, 81, 5)
@@ -15,6 +15,8 @@ class FriendSimpleStatus {
         this.cont.addChild(this.bar.cont)
         this.char = this.cont.addChild(game.make.text(0, 0, '', FONT_CYAN))
         this.name = this.cont.addChild(game.make.text(23, 3, '', FONT_VERDANA))
+        this.showTween = game.add.tween(this.cont).to({ alpha: 1, y },
+            200, null, false, delay)
 
         this.overlay = game.add.text(x + 51, y + 13, '', {
             font: '24px gennokaku',
@@ -30,10 +32,13 @@ class FriendSimpleStatus {
 
     show(friend) {
         this.cont.visible = true
-        this.cont.alpha = 1
+        this.cont.alpha = 0
+        this.cont.y -= 8
         this.bar.change(friend.hp)
         this.char.text = friend.char
         this.name.text = 'L' + friend.lv
+        this.showTween.start()
+        return this.showTween
     }
 
     hide() {
