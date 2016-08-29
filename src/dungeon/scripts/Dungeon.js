@@ -59,7 +59,7 @@ class Dungeon {
     }
 
     tryOpen() {
-        if (this.curRoomIndex < 0 && this.rooms.length) {
+        if (this.curRoomIndex < 0 && this.rooms.length - this.cand) {
             for (let e of this.enemies)
                 e.walk()
             this.advanceRoom()
