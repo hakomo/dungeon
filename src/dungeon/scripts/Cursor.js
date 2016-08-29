@@ -5,6 +5,14 @@ class Cursor {
 
         this.downLeftInBoard = false
         this.rect = new Phaser.Rectangle
+
+        this.slash1 = game.add.graphics(MENU_X, MENU_Y + MENU_SIZE)
+            .lineStyle(1, COLOR_GRAY)
+            .moveTo(0, 0).lineTo(MENU_SIZE, -MENU_SIZE)
+        this.slash2 = game.add.graphics(MENU_X + MENU_SIZE * 2, MENU_Y + MENU_SIZE)
+            .lineStyle(1, COLOR_GRAY)
+            .moveTo(0, 0).lineTo(MENU_SIZE, -MENU_SIZE)
+
         this.cont1 = game.add.graphics()
             .lineStyle(2, COLOR_ORANGE)
             .drawRect(BOARD_X, BOARD_Y, CELL_SIZE, CELL_SIZE)
@@ -12,6 +20,12 @@ class Cursor {
         this.cont2 = game.add.graphics()
             .lineStyle(4, COLOR_ORANGE)
             .drawRect(MENU_X, MENU_Y, MENU_SIZE, MENU_SIZE)
+        this.cont2.visible = false
+    }
+
+    neutralize() {
+        this.downLeftInBoard = false
+        this.cont1.visible = false
         this.cont2.visible = false
     }
 
@@ -29,6 +43,9 @@ class Cursor {
 
         if (mouse.justDownLeft() && inBoard)
             this.downLeftInBoard = true
+
+        this.slash1.visible = !dungeon.canOpen()
+        this.slash2.visible = dungeon.opened()
 
         this.cont1.visible = false
         this.cont2.visible = false
@@ -56,8 +73,12 @@ class Cursor {
             } else if (p.x < MENU_X + MENU_SIZE * 2) {
                 dungeon.info.toggleSpeed()
             } else {
-                this.cont2.visible = false
-                root.menu.show()
+                if (dungeon.opened()) {
+
+                } else {
+                    this.cont2.visible = false
+                    root.menu.show()
+                }
             }
 
         } else if (mouse.justDownRight()) {

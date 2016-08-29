@@ -40,6 +40,14 @@ class Dungeon {
         }
     }
 
+    canOpen() {
+        return this.curRoomIndex < 0 && this.rooms.length - this.cand
+    }
+
+    opened() {
+        return this.curRoomIndex >= 0
+    }
+
     clear() {
         this.curRoomIndex = -1
         for (let y = 0; y < BOARD_ROWS; ++y) {
@@ -59,7 +67,7 @@ class Dungeon {
     }
 
     tryOpen() {
-        if (this.curRoomIndex < 0 && this.rooms.length - this.cand) {
+        if (this.canOpen()) {
             for (let e of this.enemies)
                 e.walk()
             this.advanceRoom()
@@ -69,6 +77,12 @@ class Dungeon {
     }
 
     advanceRoom() {
+        if (this.curRoomIndex + 1 === this.rooms.length - this.cand) {
+            this.popRoomPreview()
+            root.menu.lose()
+            return
+        }
+
         ++this.curRoomIndex
         this.moving = true
         this.walkToNextRoom().addOnce(function() {
@@ -237,9 +251,11 @@ class Dungeon {
     }
 
     popRoomPreview() {
-        this.cand = false
-        this.rooms.pop()
-        this.draw(false)
+        if (this.cand) {
+            this.cand = false
+            this.rooms.pop()
+            this.draw(false)
+        }
     }
 
     draw(cand) {

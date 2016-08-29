@@ -28,6 +28,8 @@ class Battle {
     advance() {
         if (!this.enemies.length) {
             this.timer.stop(false)
+            this.dungeon.popRoomPreview()
+            root.menu.win()
             return
 
         } else if (!this.friends.length) {

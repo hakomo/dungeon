@@ -58,7 +58,7 @@ let root = {}
 
         let g = game.add.graphics()
             .beginFill(COLOR_BLACK)
-            .drawRect(0, 0, 640, 480)
+            .drawRect(-7, -7, 654, 494)
             .endFill().lineStyle(1, COLOR_GRAY)
             .drawRect(BOARD_X, BOARD_Y, BOARD_WIDTH, BOARD_HEIGHT)
             .moveTo(ENEMY_X, ENEMY_Y + ENEMY_HEIGHT)

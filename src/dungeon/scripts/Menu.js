@@ -63,6 +63,11 @@ class Menu {
                 root.state = root.cursor
             }, this)
         }, this)
+
+        game.camera.onShakeComplete.add(function() {
+            game.world.addChild(this.cont)
+            this.showTween.start()
+        }, this)
     }
 
     win() {
@@ -72,10 +77,10 @@ class Menu {
         this.retry.x = 353
         this.describe()
         this.back.visible = false
+        root.state.neutralize()
         root.state = null
         this.cont.alpha = 0.5
-        game.world.addChild(this.cont)
-        this.showTween.start()
+        game.camera.shake(0.01)
     }
 
     lose() {
@@ -85,18 +90,17 @@ class Menu {
         this.giveup.x = 315
         this.describe()
         this.back.visible = false
+        root.state.neutralize()
         root.state = null
         this.cont.alpha = 0.5
-        game.world.addChild(this.cont)
-        this.showTween.start()
+        game.camera.shake(0.01)
     }
 
     show() {
         this.menu.visible = true
         this.message.text = ''
-        this.option.x = 131
-        this.retry.x = 266
-        this.giveup.x = 382
+        this.option.x = 189
+        this.giveup.x = 324
         this.describe()
         this.back.visible = true
         root.state = null
