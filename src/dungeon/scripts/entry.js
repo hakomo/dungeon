@@ -36,15 +36,18 @@ const
 
     RGBA_ORANGE     = Phaser.Color.HSLtoRGB(0.1, 1.0, 0.5).rgba,
     RGBA_BLUE       = Phaser.Color.HSLtoRGB(0.6, 1.0, 0.8).rgba,
+    RGBA_WHITE      = Phaser.Color.HSLtoRGB(0.0, 0.0, 0.9).rgba,
+    RGBA_PURPLE     = Phaser.Color.HSLtoRGB(0.9, 1.0, 0.6).rgba,
 
-    FONT_GENNOKAKU      = { fill: 'white', font: '18px gennokaku' },
-    FONT_VERDANA        = { fill: 'white', font: '16px verdana' },
+    FONT_GENNOKAKU      = { fill: RGBA_WHITE, font: '18px gennokaku' },
+    FONT_VERDANA        = { fill: RGBA_WHITE, font: '16px verdana' },
     FONT_CYAN           = { fill: Phaser.Color.HSLtoRGB(0.6, 0.5, 0.8).rgba, font: '18px gennokaku' },
-    FONT_INFO_WHITE     = { fill: 'white', font: '28px verdana' },
-    FONT_INFO_PURPLE    = { fill: Phaser.Color.HSLtoRGB(0.9, 1.0, 0.5).rgba, font: '14px verdana' },
+    FONT_INFO_WHITE     = { fill: RGBA_WHITE, font: '28px verdana' },
+    FONT_INFO_PURPLE    = { fill: RGBA_PURPLE, font: '14px verdana' },
     FONT_INFO_CYAN      = { fill: Phaser.Color.HSLtoRGB(0.6, 0.5, 0.8).rgba, font: '16px verdana', align: 'center' }
 
 let game
+let root = {}
 {
     Entry.all = function() {
         game.canvas.addEventListener('contextmenu', function(e) {
@@ -74,11 +77,11 @@ let game
         game.add.image(460, 66, 'girl')
 
         Friend.pool = new FriendPool(game.add.graphics(BOARD_X, BOARD_Y))
-        dungeon = new Dungeon(new DungeonInfo(g))
+        let dungeon = new Dungeon(new DungeonInfo(g))
         Friend.status = dungeon.friendStatus
         Enemy.container = game.add.graphics(BOARD_X, BOARD_Y)
         dungeon.enemyEntryNotice = new EnemyEntryNotice
-        cursor = new Cursor(dungeon)
+        root.cursor = new Cursor(dungeon)
 
         for (let y = 0; y < BOARD_ROWS; ++y) {
             for (let x = 0; x < BOARD_COLUMNS; ++x) {
@@ -105,23 +108,29 @@ let game
             let e = new Enemy('剣士', game.rnd.between(1, 99), s)
             dungeon.enemies.push(e)
         }
+
+        root.menu = new Menu
+
+        root.state = root.cursor
     }
 
     let mouse
-    let cursor
-    let dungeon
     game = new Phaser.Game(640, 480, Phaser.AUTO, 'game', {
         preload() {
             game.load
                 .image('girl', 'images/girl.png')
                 .spritesheet('swordsman', 'images/swordsman.png', 32, 32)
+                .spritesheet('giveup', 'images/giveup.png', 126, 33)
+                .spritesheet('nextday', 'images/nextday.png', 151, 33)
+                .spritesheet('option', 'images/option.png', 119, 33)
+                .spritesheet('retry', 'images/retry.png', 100, 33)
         },
 
         create: Entry.one,
 
         update() {
-            if (cursor)
-                cursor.update(mouse)
+            if (root.state)
+                root.state.update(mouse)
         },
     })
 }

@@ -56,7 +56,8 @@ class Cursor {
             } else if (p.x < MENU_X + MENU_SIZE * 2) {
                 dungeon.info.toggleSpeed()
             } else {
-
+                this.cont2.visible = false
+                root.menu.show()
             }
 
         } else if (mouse.justDownRight()) {
