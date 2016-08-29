@@ -168,16 +168,11 @@ class Dungeon {
                 signal.dispose()
             }
         }
-
-        if (n) {
-            let mx = Math.max(...delays)
-            for (let i = 0; i < tweens.length; ++i) {
-                tweens[i].onComplete.addOnce(one)
-                tweens[i].delay(mx - delays[i])
-                tweens[i].start()
-            }
-
-        } else {
+        let mx = Math.max(...delays)
+        for (let i = 0; i < tweens.length; ++i) {
+            tweens[i].onComplete.addOnce(one)
+            tweens[i].delay(mx - delays[i])
+            tweens[i].start()
         }
         return signal
     }

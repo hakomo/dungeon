@@ -45,7 +45,9 @@ class Battle {
                 this.charas[j] = chara
             }
         }
+
         this.charas[this.index].act(this.enemies, this.friends, this.aggressive)
+
         for (let i = this.enemies.length - 1; i >= 0; --i) {
             if (this.enemies[i].state !== CHARA_BATTLE)
                 this.enemies.splice(i, 1)
