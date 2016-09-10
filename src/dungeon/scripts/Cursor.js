@@ -18,6 +18,7 @@ class Cursor {
             .drawRect(BOARD_X, BOARD_Y, CELL_SIZE, CELL_SIZE)
         this.cont1.visible = false
         this.cont2 = game.add.graphics()
+            .beginFill(COLOR_WHITE, 0.2)
             .lineStyle(4, COLOR_ORANGE)
             .drawRect(MENU_X, MENU_Y, MENU_SIZE, MENU_SIZE)
         this.cont2.visible = false
