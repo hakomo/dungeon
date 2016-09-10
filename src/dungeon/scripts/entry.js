@@ -110,6 +110,7 @@ let root = {}
         }
 
         root.menu = new Menu
+        root.talk = new Talk
 
         root.state = root.cursor
     }
