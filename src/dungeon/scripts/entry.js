@@ -86,20 +86,18 @@ let root = {}
         for (let y = 0; y < BOARD_ROWS; ++y) {
             for (let x = 0; x < BOARD_COLUMNS; ++x) {
                 if (game.rnd.frac() < 0.08) {
-                    new Friend(
-                        x,
-                        y,
-                        game.rnd.between(1, 99),
-                        dungeon.friends,
-                        '竜',
-                        'ドラゴン',
-                        game.rnd.between(0, 5),
-                        game.rnd.between(1, 5),
-                        game.rnd.between(1, 5),
-                        game.rnd.between(1, 5),
-                        game.rnd.between(0, 2),
-                        game.rnd.between(0, 2)
-                    )
+                    let FriendClass = game.rnd.pick([
+                        ZombieFriend,
+                        DevilFriend,
+                        DragonFriend,
+                        SlimeFriend,
+                        RobotFriend,
+                        EyesFriend,
+                        MaskFriend,
+                        GoblinFriend,
+                        ForestFriend
+                    ])
+                    new FriendClass(x, y, game.rnd.between(1, 99), dungeon.friends)
                 }
             }
         }

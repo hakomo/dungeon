@@ -1,6 +1,6 @@
 
 class Friend {
-    constructor(x, y, lv, friends, char, name, atk, def, mag, mnd, com, rms) {
+    constructor(x, y, lv, friends, char, name, caption, atk, def, mag, mnd, com, rms) {
         if (friends[y][x])
             friends[y][x].destroy()
 
@@ -12,7 +12,8 @@ class Friend {
         this.startHp
         this.friends = friends
         this.char = char
-        this.name = char + ' ' + name
+        this.name = name
+        this.caption = caption
         this.atk = atk
         this.def = def
         this.mag = mag
@@ -64,3 +65,57 @@ class Friend {
 }
 Friend.pool = null
 Friend.status = null
+
+class ZombieFriend extends Friend {
+    constructor(x, y, lv, friends) {
+        super(x, y, lv, friends, '屍', 'ゾンビー', '猛毒 付与', 4, 1, 0, 1, 0, 0)
+    }
+}
+
+class DevilFriend extends Friend {
+    constructor(x, y, lv, friends) {
+        super(x, y, lv, friends, '悪', '悪魔ベルフェゴル', '怠惰 付与', 0, 2, 5, 4, 0, 1)
+    }
+}
+
+class DragonFriend extends Friend {
+    constructor(x, y, lv, friends) {
+        super(x, y, lv, friends, '竜', 'ドラゴン', '火傷 付与', 5, 4, 0, 3, 0, 2)
+    }
+}
+
+class SlimeFriend extends Friend {
+    constructor(x, y, lv, friends) {
+        super(x, y, lv, friends, '粘', 'スライム', '溶解 付与', 1, 3, 0, 2, 1, 0)
+    }
+}
+
+class RobotFriend extends Friend {
+    constructor(x, y, lv, friends) {
+        super(x, y, lv, friends, '機', '魔導人形', '', 0, 5, 4, 1, 1, 1)
+    }
+}
+
+class EyesFriend extends Friend {
+    constructor(x, y, lv, friends) {
+        super(x, y, lv, friends, '眼', 'ヒャクメ', '幻惑 付与', 3, 2, 0, 3, 1, 2)
+    }
+}
+
+class MaskFriend extends Friend {
+    constructor(x, y, lv, friends) {
+        super(x, y, lv, friends, '面', 'クチナシの仮面', '沈黙 付与', 0, 4, 3, 2, 2, 0)
+    }
+}
+
+class GoblinFriend extends Friend {
+    constructor(x, y, lv, friends) {
+        super(x, y, lv, friends, '亜', 'ゴブリン', '', 2, 2, 0, 1, 2, 1)
+    }
+}
+
+class ForestFriend extends Friend {
+    constructor(x, y, lv, friends) {
+        super(x, y, lv, friends, '森', '森林地帯', '迷子 付与', 1, 3, 0, 1, 2, 2)
+    }
+}

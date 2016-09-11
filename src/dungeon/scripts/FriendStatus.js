@@ -29,6 +29,7 @@ class FriendStatus {
         this.cont.addChild(game.make.text(0, 96, '連携', FONT_CYAN))
         this.com = this.cont.addChild(game.make.text(38, 99, '', FONT_VERDANA))
         this.rms = this.cont.addChild(game.make.text(FRIEND_WIDTH, 96, '', FONT_GENNOKAKU))
+        this.caption = this.cont.addChild(game.make.text(0, 120, '', FONT_GENNOKAKU))
 
         this.hide()
     }
@@ -47,6 +48,7 @@ class FriendStatus {
         this.mnd.text = this.numbers[friend.mnd]
         this.com.text = this.numbers[friend.com]
         this.rms.text = ['狭いと強い', '', '広いと強い'][friend.rms]
+        this.caption.text = friend.caption
     }
 
     updateHp(friend) {
