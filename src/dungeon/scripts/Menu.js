@@ -28,6 +28,22 @@ class Menu {
             this[name].onInputOver.add(this.describe, this, 0, desc)
             this[name].onInputOut.add(this.describe, this)
         }
+        this.option.onInputUp.add(function(a, b, c) {
+            if (c && root.state) {
+            }
+        })
+        this.nextday.onInputUp.add(function(a, b, c) {
+            if (c && root.state) {
+            }
+        })
+        this.retry.onInputUp.add(function(a, b, c) {
+            if (c && root.state) {
+            }
+        })
+        this.giveup.onInputUp.add(function(a, b, c) {
+            if (c && root.state) {
+            }
+        })
 
         this.description = game.make.text(104, 80, '', {
             fill: Phaser.Color.HSLtoRGB(0.6, 0.5, 0.8).rgba,
