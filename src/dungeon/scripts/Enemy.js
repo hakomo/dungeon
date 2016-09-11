@@ -54,6 +54,10 @@ class Enemy {
         game.rnd.pick(friends).damage(game.rnd.realInRange(0.01, 0.05))
     }
 
+    condition(char) {
+        this.status.condition(this.conditions.push(char))
+    }
+
     advanceRoom() {
         if (this.state === CHARA_BATTLE)
             this.status.condition(this.conditions.advanceRoom())
