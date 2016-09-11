@@ -88,6 +88,8 @@ class Dungeon {
         this.walkToNextRoom().addOnce(function() {
             this.moving = false
             this.draw(this.cand)
+            for (let e of this.enemies)
+                e.advanceRoom()
             for (let s of this.simpleStatuses)
                 s.hide()
             this.battleFriends.splice(0, this.battleFriends.length)

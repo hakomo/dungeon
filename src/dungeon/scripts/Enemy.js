@@ -7,6 +7,7 @@ class Enemy {
         this.hp = 200
         this.maxHp = 200
         this.state = CHARA_BATTLE
+        this.conditions = new Conditions
 
         this.cont = game.make.sprite(0, 0, 'swordsman')
         this.cont.visible = false
@@ -51,6 +52,11 @@ class Enemy {
 
     act(enemies, friends) {
         game.rnd.pick(friends).damage(game.rnd.realInRange(0.01, 0.05))
+    }
+
+    advanceRoom() {
+        if (this.state === CHARA_BATTLE)
+            this.status.condition(this.conditions.advanceRoom())
     }
 
     destroy() {

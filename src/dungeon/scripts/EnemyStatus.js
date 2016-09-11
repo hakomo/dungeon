@@ -56,4 +56,8 @@ class EnemyStatus {
             this.overlayTween.start()
         }
     }
+
+    condition(text) {
+        this.conds.text = text || this.conds.text
+    }
 }
