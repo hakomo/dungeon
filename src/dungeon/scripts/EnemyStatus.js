@@ -57,7 +57,11 @@ class EnemyStatus {
         }
     }
 
-    condition(text) {
-        this.conds.text = text || this.conds.text
+    condition(char, text) {
+        if (text) {
+            this.conds.text = text
+            root.effect.condition(this.cont.x + ENEMY_WIDTH / 2,
+                this.cont.y + ENEMY_HEIGHT / 2, char)
+        }
     }
 }

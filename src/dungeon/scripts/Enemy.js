@@ -55,12 +55,12 @@ class Enemy {
     }
 
     condition(char) {
-        this.status.condition(this.conditions.push(char))
+        this.status.condition(char, this.conditions.push(char))
     }
 
     advanceRoom() {
         if (this.state === CHARA_BATTLE)
-            this.status.condition(this.conditions.advanceRoom())
+            this.status.condition('autoheal', this.conditions.advanceRoom())
     }
 
     destroy() {
