@@ -53,7 +53,10 @@ class Friend {
 
     act(enemies, friends, aggressive) {
         if (this.startHp - this.hp < (aggressive ? 0.4 : 0.2)) {
-            game.rnd.pick(enemies).damage(game.rnd.between(2, 10))
+            let e = game.rnd.pick(enemies)
+            e.damage(game.rnd.between(2, 10))
+            if (this.rare && game.rnd.frac() < 0.3)
+                e.condition(this.conditionchar)
 
         } else {
             this.state = CHARA_ESCAPE
