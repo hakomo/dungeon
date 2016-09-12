@@ -107,6 +107,7 @@ let root = {}
             dungeon.enemies.push(e)
         }
 
+        root.effect = new Effect
         root.menu = new Menu
         root.talk = new Talk
 
@@ -123,6 +124,14 @@ let root = {}
                 .spritesheet('nextday', 'images/nextday.png', 151, 33)
                 .spritesheet('option', 'images/option.png', 119, 33)
                 .spritesheet('retry', 'images/retry.png', 100, 33)
+                .spritesheet('burn', 'images/burn.png', 240, 240)
+                .spritesheet('dazzle', 'images/dazzle.png', 240, 240)
+                .spritesheet('lostchild', 'images/lostchild.png', 240, 240)
+                .spritesheet('melting', 'images/melting.png', 240, 240)
+                .spritesheet('poison', 'images/poison.png', 240, 240)
+                .spritesheet('silence', 'images/silence.png', 240, 240)
+                .spritesheet('sloth', 'images/sloth.png', 240, 240)
+                .spritesheet('autoheal', 'images/autoheal.png', 240, 240)
         },
 
         create: Entry.one,
